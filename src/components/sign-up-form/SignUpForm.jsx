@@ -1,11 +1,14 @@
 import { useState } from "react";
 
 import FormInput from "../form-input/FormInput";
+import Button from "../button/Button";
 
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utilities/folder/Firebase";
+
+import "./signUpForm.css"
 
 function SignUpForm() {
   const [formFields, setFormFields] = useState({
@@ -39,9 +42,8 @@ function SignUpForm() {
           password: "",
           confirmPassword: "",
         });
-      } catch (err) {
+      } catch (err) {  // .code method returns the code of the error and we can know the code from logging the error
         if (err.code === "auth/email-already-in-use") {
-          // .code method returns the code of the error and we can know the code from logging the error
           alert("Email already in use");
         } else {
           console.error(err);
@@ -53,8 +55,9 @@ function SignUpForm() {
   };
 
   return (
-    <div>
-      <h1>Sign Up With Email and Password</h1>
+    <div className="sign-up-container">
+      <h2>Don't have an account ?</h2>
+      <span>Sign Up With Email and Password</span>
 
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -89,7 +92,10 @@ function SignUpForm() {
           value={formFields.confirmPassword}
         />
 
-        <button type="submit">Sign Up</button>
+        <Button 
+          buttonName="Sign Up"
+          type="submit"
+        />
       </form>
     </div>
   );

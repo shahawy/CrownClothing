@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore"; // doc: used to specify the document in which collection by the id, getDoc: used to retrieve the required document, setDoc: used to addDoc
 
 const firebaseConfig = {
@@ -29,11 +29,17 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {  
   return await createUserWithEmailAndPassword(auth, email, password)
 }
 
+export const loginUserWithEmailAndPassword = async (email, password) => {  // Function used to log in user with email and password
+  if (!email || !password) return;  // To return nothing and doesn't complete the function if there is no user information
+
+  return await signInWithEmailAndPassword(auth, email, password)
+}
+
 
 // Storing the Authenticated users in the database
 export const database = getFirestore(firebaseApp);
 
-// The function responsible for storing new signing in users in the database
+// The function responsible for storing new signing in users in the database (Used with Registering methods only because it is used to store the data of the new users)
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation) => {  // userAuth: is the user information returned when the user sign in, additionalInformation: To add information when using setDocs() as while Signing Up with email and password the displayName will be null it only comes with value with the Providers like Google, so we have to add the displayName value while Signing Up with email and password as we will see while using setDocs()
   if (!userAuth) return;  // To return nothing and doesn't complete the function if there is no user information (as if the user clicked the button and then he go back and didn't sign in)
 

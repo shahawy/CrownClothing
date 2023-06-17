@@ -50,7 +50,7 @@ function NavigationBar() {
           <Link className="nav-link">
             SHOP
           </Link>
-          <Link className="nav-link" to="/signIn">
+          <Link className="nav-link" to="/authentication">
             SIGN IN
           </Link>
         </div>
