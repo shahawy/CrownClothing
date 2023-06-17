@@ -1,0 +1,27 @@
+.group {
+  position: relative;
+  margin: 45px 0;
+}
+.group .form-input {
+  background: none;
+  background-color: white;
+  color: grey;
+  font-size: 1rem;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid grey;
+}
+.group .form-input:focus {
+  outline: none;
+}
+.group input[type=password] {
+  letter-spacing: 0.3em;
+}
+.group .form-input-label {
+  color: grey;
+  font-size: 1.5rem;
+  font-weight: bold;
+}/*# sourceMappingURL=formInput.css.map */
