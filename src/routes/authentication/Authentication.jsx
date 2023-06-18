@@ -1,13 +1,13 @@
 import SignUpForm from "../../components/sign-up-form/SignUpForm";
 import SignInForm from "../../components/sign-in-form/SignInForm";
 
+import "./authentication.css"
+
 
 function Authentication() {
 
   return (
-    <div>
-      <h1>Sign In page</h1>
-
+    <div className="authentication-container">
       <SignInForm />
       <SignUpForm />
     </div>
