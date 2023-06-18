@@ -1,13 +1,18 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
 import { Outlet, Link } from "react-router-dom";
 
 import { signOutUser } from "../../utilities/folder/Firebase";
 
+import CartIcon from "../../components/cart-icon/CartIcon";
+import CartDropdown from "../../components/cart-dropdown/CartDropdown";
+
 import "./navigationBar.css"
 
 function NavigationBar() {
+
+  const [isCartOpen, setIsCartOpen] = useState(false)  // state responsible for showing the cart component on clicking the cart item
 
   const {currentUser, setCurrentUser} = useContext(UserContext)
 
@@ -60,7 +65,7 @@ function NavigationBar() {
         </Link>
 
         <div className="nav-links-container">
-          <Link className="nav-link">
+          <Link className="nav-link" to="/shop">
             SHOP
           </Link>
 
@@ -71,7 +76,12 @@ function NavigationBar() {
           </Link>
           }
 
+          <CartIcon handleDisplayCart={() => setIsCartOpen(!isCartOpen)} />
+
         </div>
+
+        {isCartOpen && <CartDropdown />}
+
       </div>
       
       <Outlet />

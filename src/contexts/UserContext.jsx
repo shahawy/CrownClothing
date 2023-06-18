@@ -1,3 +1,5 @@
+// Context that stores the user Authentication
+
 import { createContext, useState } from "react";
 
 export const UserContext = createContext({  // Initial value of the context and this what we use in the components

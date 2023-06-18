@@ -1,0 +1,20 @@
+import "./productCard.css";
+
+import Button from "../button/Button";
+
+function ProductCard(props) {
+  return (
+    <div className="product-card-container">
+      <img loading="lazy" src={props.image} alt="product-image" />
+
+      <div className="footer">
+        <span className="name">{props.name}</span>
+        <span className="price">{props.price}</span>
+      </div>
+
+      <Button buttonName="Add To Cart" buttonType="inverted" />
+    </div>
+  );
+}
+
+export default ProductCard;
