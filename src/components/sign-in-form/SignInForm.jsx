@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { UserContext } from "../../contexts/UserContext";
 
 import FormInput from "../form-input/FormInput";
 import Button from "../button/Button";
@@ -17,6 +19,8 @@ function SignInForm() {
     password: "",
   });
 
+  const { setCurrentUser } = useContext(UserContext);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputFields((prev) => ({ ...prev, [name]: value }));
@@ -25,10 +29,12 @@ function SignInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let response = await loginUserWithEmailAndPassword(
+      const { user } = await loginUserWithEmailAndPassword(
         inputFields.email,
         inputFields.password
       );
+
+      setCurrentUser(user);
 
       setInputFields({
         email: "",
@@ -48,7 +54,11 @@ function SignInForm() {
 
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup(); // user: is the user information returned when the user sign in
+    
+    setCurrentUser(user)
+
     const userDocRef = await createUserDocumentFromAuth(user);
+
   };
 
   return (
@@ -76,7 +86,7 @@ function SignInForm() {
         <div className="buttons-container">
           <Button buttonName="Sign In" type="submit" />
           <Button
-            type="button"  // The button inside a form element by default has the type of submit, so if we have a button inside the form that we don't want to submit the form like the Sign In with Google button, we change its type by giving it type="button"
+            type="button" // The button inside a form element by default has the type of submit, so if we have a button inside the form that we don't want to submit the form like the Sign In with Google button, we change its type by giving it type="button"
             onClick={signInWithGoogle}
             buttonName="Sign In with Google"
             buttonType="google"

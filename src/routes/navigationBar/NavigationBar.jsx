@@ -1,8 +1,21 @@
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
+
 import { Outlet, Link } from "react-router-dom";
+
+import { signOutUser } from "../../utilities/folder/Firebase";
 
 import "./navigationBar.css"
 
 function NavigationBar() {
+
+  const {currentUser, setCurrentUser} = useContext(UserContext)
+
+  const signOutHandler = async () => {
+    await signOutUser()
+    setCurrentUser(null)
+  }
+
   return (
     <>
       <div className="navigation">
@@ -50,9 +63,14 @@ function NavigationBar() {
           <Link className="nav-link">
             SHOP
           </Link>
-          <Link className="nav-link" to="/authentication">
+
+          {currentUser ? 
+            <span onClick={signOutHandler} className="nav-link">Sign Out</span> :
+            <Link className="nav-link" to="/authentication">
             SIGN IN
           </Link>
+          }
+
         </div>
       </div>
       

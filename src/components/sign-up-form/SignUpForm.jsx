@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 import FormInput from "../form-input/FormInput";
 import Button from "../button/Button";
@@ -18,6 +19,8 @@ function SignUpForm() {
     confirmPassword: "",
   });
 
+  const {setCurrentUser} = useContext(UserContext)
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormFields((prev) => ({ ...prev, [name]: value }));
@@ -32,6 +35,9 @@ function SignUpForm() {
           formFields.email,
           formFields.password
         );
+   
+        setCurrentUser(user)
+
         const userDocRef = await createUserDocumentFromAuth(user, {
           displayName: formFields.displayName,
         }); // The object in the second argument: To add information when using setDocs() as while Signing Up with email and password the displayName will be null it only comes with value with the Providers like Google, so we have to add the displayName value while Signing Up with email and password as we will see while using setDocs()
