@@ -1,9 +1,6 @@
-import { useContext } from "react"
-import { CartContext } from "../../contexts/CartContext"
+
 
 function CheckoutItem(props) {
-
-    const {cartItems, setCartItems} = useContext(CartContext)
 
   return (
     <div>
@@ -12,14 +9,14 @@ function CheckoutItem(props) {
       <span>{props.name}</span>
 
       <span>
-      <span onClick={decreaseQuantity}>{`<`}</span>
+      <span onClick={props.decreaseQuantity}>{`<`}</span>
       <span>{props.quantity}</span>
-      <span onClick={increaseQuantity}>{`>`}</span>
+      <span onClick={props.increaseQuantity}>{`>`}</span>
       </span>
 
       <p>{props.price}</p>
 
-      <span onClick={removeItem}>x</span>
+      <span onClick={props.removeItem}>x</span>
     </div>
   )
 }
