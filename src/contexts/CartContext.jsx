@@ -1,3 +1,5 @@
+// context of the products selected by the user in the cart
+
 import { createContext, useState } from "react";
 
 export const CartContext = createContext({

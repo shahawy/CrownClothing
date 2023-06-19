@@ -4,6 +4,7 @@ import NavigationBar from "./routes/navigationBar/Navigationbar";
 import Home from "./routes/home/Home";
 import Authentication from "./routes/authentication/Authentication";
 import Shop from "./routes/shop/Shop";
+import Checkout from "./routes/checkout/Checkout";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route index element={<Home />} />    {/* index: means that this component is displayed with the the parent Route by default */}
         <Route path="authentication" element={<Authentication />} />
         <Route path="shop" element={<Shop />} />
+        <Route path="checkout" element={<Checkout />} />
       </Route>
     </Routes>
   );
