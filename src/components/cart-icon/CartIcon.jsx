@@ -1,6 +1,17 @@
+import { useContext, useState, useEffect } from "react";
+import { CartContext } from "../../contexts/CartContext";
+
 import "./cartIcon.css";
 
 function CartIcon(props) {
+  const { cartItems } = useContext(CartContext);
+  const [cartItemsNumber, setCartItemsNumber] = useState(0);
+
+  useEffect(() => {   // Function in which we used .reduce method to get the total quantity of the in the cart
+      const quantity = cartItems.reduce((accumulator, currentItem) =>  accumulator + currentItem.quantity, 0); // 0: the initial value while using .reduce method
+      setCartItemsNumber(quantity);   
+  }, [cartItems]);
+
   return (
     <div className="cart-icon-container" onClick={props.handleDisplayCart}>
       <svg
@@ -63,7 +74,7 @@ function CartIcon(props) {
         <g />
       </svg>
 
-      <span className="item-count">0</span>
+      <span className="item-count">{cartItemsNumber}</span>
     </div>
   );
 }

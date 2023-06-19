@@ -12,7 +12,7 @@ function ProductCard(props) {
         <span className="price">{props.price}</span>
       </div>
 
-      <Button buttonName="Add To Cart" buttonType="inverted" />
+      <Button onClick={props.addToCartClick} buttonName="Add To Cart" buttonType="inverted" />
     </div>
   );
 }
