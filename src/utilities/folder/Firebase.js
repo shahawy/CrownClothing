@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore"; // doc: used to specify the document in which collection by the id, getDoc: used to retrieve the required document, setDoc: used to addDoc
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, query, getDocs } from "firebase/firestore"; // doc: used to specify the document in which collection by the id, getDoc: used to retrieve the required document, setDoc: used to addDoc
 
 const firebaseConfig = {
   apiKey: "AIzaSyDcvap-Yg5Kb7AMyLUShqVrQ6g9q5lTPR0",
@@ -66,4 +66,32 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
   }
 
   return userDocRef; // To return the user document if he signed in before or it is the first time and we created a document for him, return the document anyway
+};
+
+
+
+// Storing Data in the database ( For the products, no relation with Authentication)
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = collection(database, collectionKey)
+  const batch = writeBatch(database)
+
+  objectsToAdd.forEach(object => {
+    const docRef = doc(collectionRef, object.title.toLowerCase())
+    batch.set(docRef, object)
+  })
+  await batch.commit()
+}
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(database, 'categories');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  return categoryMap;
 };

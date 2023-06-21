@@ -1,16 +1,15 @@
-import './categoryItem.css';
+import './directoryItem.css';
 
-function CategoryItem(props) {
-
+function DirectoryItem(props) {
   return (
-    <div className='category-container'>
+    <div className='directory-item-container'>
       <div
         className='background-image'
         style={{
           backgroundImage: `url(${props.image})`,
         }}
       />
-      <div className='category-body-container'>
+      <div className='body'>
         <h2>{props.title}</h2>
         <p>Shop Now</p>
       </div>
@@ -18,4 +17,4 @@ function CategoryItem(props) {
   );
 };
 
-export default CategoryItem;
+export default DirectoryItem;
