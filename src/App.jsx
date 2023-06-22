@@ -1,3 +1,7 @@
+import { useEffect, useContext } from "react";
+import { onAuthStateChangedListener } from "./utilities/folder/Firebase";
+import { UserContext } from "./contexts/UserContext";
+
 import { Routes, Route } from "react-router-dom";
 
 import NavigationBar from "./routes/navigationBar/Navigationbar";
@@ -8,6 +12,17 @@ import Checkout from "./routes/checkout/Checkout";
 
 
 const App = () => {
+
+  const {setCurrentUser} = useContext(UserContext)
+
+useEffect(() => {
+   const unsubscribe = onAuthStateChangedListener((user) => {
+    setCurrentUser(user)
+   })
+
+   return unsubscribe  // To make the code run once when the component mounts to avoid memory leaks as onAuthStateChanged() method already listens for any changes in the user's Authentication state
+}, [])
+
   return (
     <Routes>
       <Route path="/" element={<NavigationBar />}>

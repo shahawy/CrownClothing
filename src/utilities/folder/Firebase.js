@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, query, getDocs } from "firebase/firestore"; // doc: used to specify the document in which collection by the id, getDoc: used to retrieve the required document, setDoc: used to addDoc
 
 const firebaseConfig = {
@@ -13,7 +13,8 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 
-// Authentication
+
+// Authentication Functions (Signing In & Out)
 export const auth = getAuth(firebaseApp);
 export const googleAuth = new GoogleAuthProvider();
 
@@ -36,6 +37,14 @@ export const loginUserWithEmailAndPassword = async (email, password) => {  // Fu
 }
 
 export const signOutUser = async () => await signOut(auth)  // Function used to log out user
+
+export const onAuthStateChangedListener = (callbackFunction) => onAuthStateChanged(auth, callbackFunction);
+/* Function makes the user still logged in on refreshing the page, as this method watches the Authentication process 
+and is triggered when the Authentication state changes, it takes a callback function as argument 
+this callback function takes one argument which stands for the Authentication object (user object) returned when the Authentication state 
+changes and this function should be in the <App /> component to be accessible by the whole components, this replaces refresh token,
+this method depends on saving the user's data in the local storage or session storage */
+
 
 
 // Storing the Authenticated users in the database
