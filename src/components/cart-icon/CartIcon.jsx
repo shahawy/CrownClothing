@@ -1,10 +1,10 @@
-import { useContext, useState, useEffect } from "react";
-import { CartContext } from "../../contexts/CartContext";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import "./cartIcon.css";
 
 function CartIcon(props) {
-  const { cartItems } = useContext(CartContext);
+  const cartItems = useSelector(state => state.cart.value)
   const [cartItemsNumber, setCartItemsNumber] = useState(0);
 
   useEffect(() => {   // Function in which we used .reduce method to get the total quantity of the in the cart
@@ -14,7 +14,7 @@ function CartIcon(props) {
 
   return (
     <div className="cart-icon-container" onClick={props.handleDisplayCart}>
-      <svg
+      <svg    // svg of the cart icon
         className="shopping-icon"
         version="1.1"
         id="Capa_1"

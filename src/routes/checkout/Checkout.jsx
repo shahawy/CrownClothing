@@ -1,5 +1,7 @@
 import { useContext, useState, useEffect } from "react";
-import { CartContext } from "../../contexts/CartContext";
+
+import { useDispatch, useSelector } from "react-redux";
+import { addPresentItemsToCart, removeItemsFromCart, clearItemsFromCart } from "../../redux/cartSlice";
 
 import CheckoutItem from "../../components/checkout-item/CheckoutItem";
 
@@ -8,45 +10,33 @@ import "./checkout.css";
 function Checkout() {
   const [totalCartPrice, setTotalCartPrice] = useState(0);
 
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.value);
 
-  const removeItem = (product) => {
-    const newCartItems = cartItems.filter((cartItem) => {
-      return cartItem.id !== product.id;
-    });
-    setCartItems(newCartItems);
+
+  const clearItem = (productData) => {
+    dispatch(clearItemsFromCart(productData))
   };
 
-  const decreaseQuantity = (product) => {
-    if (product.quantity > 1) {
-      const newCartItems = cartItems.map((cartItem) => {
-        return cartItem.id === product.id
-          ? { ...cartItem, quantity: cartItem.quantity - 1 }
-          : cartItem;
-      });
-      setCartItems(newCartItems);
+  const decreaseQuantity = (productData) => {
+    if (productData.quantity > 1) {
+      dispatch(removeItemsFromCart(productData))
     } else {
-      removeItem(product);
+      dispatch(clearItemsFromCart(productData))
     }
   };
 
-  const increaseQuantity = (product) => {
-    const newCartItems = cartItems.map((cartItem) => {
-      return cartItem.id === product.id
-        ? { ...cartItem, quantity: cartItem.quantity + 1 }
-        : cartItem;
-    });
-    setCartItems(newCartItems);
+  const increaseQuantity = (productData) => {
+    dispatch(addPresentItemsToCart(productData));
   };
 
   useEffect(() => {
     const totalPrice = cartItems.reduce((accumulator, currentElement) => {
       return accumulator + currentElement.quantity * currentElement.price;
-    }, 0);    // In .reduce, the second argument (0) is the initial state of the accumulator
+    }, 0); // In .reduce, the second argument (0) is the initial state of the accumulator
 
     setTotalCartPrice(totalPrice);
   }, [cartItems]);
-
 
   return (
     <div className="checkout-container">
@@ -78,7 +68,7 @@ function Checkout() {
             price={product.price}
             decreaseQuantity={() => decreaseQuantity(product)}
             increaseQuantity={() => increaseQuantity(product)}
-            removeItem={() => removeItem(product)}
+            clearItem={() => clearItem(product)}
           />
         );
       })}

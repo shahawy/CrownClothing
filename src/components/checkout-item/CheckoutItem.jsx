@@ -13,7 +13,7 @@ function CheckoutItem(props) {
         <div onClick={props.increaseQuantity} className="arrow">{`>`}</div>
       </span>
       <span className="price">{props.price}</span>
-      <div onClick={props.removeItem} className="remove-button">x</div>
+      <div onClick={props.clearItem} className="remove-button">x</div>
     </div>
   );
 }

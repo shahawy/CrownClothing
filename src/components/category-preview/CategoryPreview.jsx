@@ -1,5 +1,8 @@
-import { useContext } from "react";
-import { CartContext } from "../../contexts/CartContext";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addPresentItemsToCart,
+  addNewItemsToCart,
+} from "../../redux/cartSlice";
 
 import { Link } from "react-router-dom";
 
@@ -8,7 +11,8 @@ import ProductCard from "../product-card/ProductCard";
 import "./categoryPreview.css";
 
 function CategoryPreview(props) {
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.value);
 
   const addToCartClick = (productData) => {
     const existingProduct = cartItems.find(
@@ -16,15 +20,9 @@ function CategoryPreview(props) {
     );
 
     if (existingProduct) {
-      setCartItems((prev) =>
-        prev.map((product) => {
-          return product.id === productData.id
-            ? { ...product, quantity: product.quantity + 1 }
-            : product;
-        })
-      );
+      dispatch(addPresentItemsToCart(productData));
     } else {
-      setCartItems([...cartItems, { ...productData, quantity: 1 }]);
+      dispatch(addNewItemsToCart(productData));
     }
   };
 
