@@ -1,6 +1,7 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 
-import { UserContext } from "../../contexts/UserContext";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../redux/userSlice"; 
 
 import FormInput from "../form-input/FormInput";
 import Button from "../button/Button";
@@ -19,7 +20,8 @@ function SignInForm() {
     password: "",
   });
 
-  const { setCurrentUser } = useContext(UserContext);
+  const dispatch = useDispatch()
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +36,7 @@ function SignInForm() {
         inputFields.password
       );
 
-      setCurrentUser(user);
+      dispatch(setCurrentUser(user));
 
       setInputFields({
         email: "",
@@ -55,7 +57,7 @@ function SignInForm() {
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup(); // user: is the user information returned when the user sign in
     
-    setCurrentUser(user)
+    dispatch(setCurrentUser(user));
 
     const userDocRef = await createUserDocumentFromAuth(user);
 

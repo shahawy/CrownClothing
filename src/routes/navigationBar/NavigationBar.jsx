@@ -1,5 +1,7 @@
-import { useContext, useState } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentUser } from "../../redux/userSlice"; 
 
 import { Outlet, Link } from "react-router-dom";
 
@@ -14,11 +16,12 @@ function NavigationBar() {
 
   const [isCartOpen, setIsCartOpen] = useState(false)  // state responsible for showing the cart component on clicking the cart item
 
-  const {currentUser, setCurrentUser} = useContext(UserContext)
+  const dispatch = useDispatch()
+  const currentUser = useSelector((state) => state.user.value)
 
   const signOutHandler = async () => {
     await signOutUser()
-    setCurrentUser(null)
+    dispatch(setCurrentUser(null));
   }
 
   return (

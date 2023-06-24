@@ -1,5 +1,7 @@
-import { useState, useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { useState } from "react";
+
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../redux/userSlice"; 
 
 import FormInput from "../form-input/FormInput";
 import Button from "../button/Button";
@@ -19,7 +21,7 @@ function SignUpForm() {
     confirmPassword: "",
   });
 
-  const {setCurrentUser} = useContext(UserContext)
+  const dispatch = useDispatch()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,7 +38,7 @@ function SignUpForm() {
           formFields.password
         );
    
-        setCurrentUser(user)
+        dispatch(setCurrentUser(user));
 
         const userDocRef = await createUserDocumentFromAuth(user, {
           displayName: formFields.displayName,
