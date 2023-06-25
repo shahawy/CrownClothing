@@ -1,9 +1,10 @@
 import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentUser } from "../../redux/userSlice"; 
+import { setCurrentUser } from "../../redux/userSlice";
+import { clearTheWholeCart } from "../../redux/cartSlice"; 
 
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 
 import { signOutUser } from "../../utilities/folder/Firebase";
 
@@ -19,9 +20,13 @@ function NavigationBar() {
   const dispatch = useDispatch()
   const currentUser = useSelector((state) => state.user.value)
 
+  const navigate = useNavigate()
+
   const signOutHandler = async () => {
     await signOutUser()
     dispatch(setCurrentUser(null));
+    dispatch(clearTheWholeCart())
+    navigate("/")
   }
 
   return (

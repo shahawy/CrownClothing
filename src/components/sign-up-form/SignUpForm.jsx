@@ -1,7 +1,9 @@
 import { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../../redux/userSlice"; 
+import { setCurrentUser } from "../../redux/userSlice";
+
+import { useNavigate } from "react-router-dom";
 
 import FormInput from "../form-input/FormInput";
 import Button from "../button/Button";
@@ -14,6 +16,7 @@ import {
 import "./signUpForm.css"
 
 function SignUpForm() {
+
   const [formFields, setFormFields] = useState({
     displayName: "",
     email: "",
@@ -22,6 +25,7 @@ function SignUpForm() {
   });
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,6 +43,7 @@ function SignUpForm() {
         );
    
         dispatch(setCurrentUser(user));
+        navigate("/")
 
         const userDocRef = await createUserDocumentFromAuth(user, {
           displayName: formFields.displayName,

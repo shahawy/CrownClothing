@@ -4,26 +4,35 @@ import {
   addNewItemsToCart,
 } from "../../redux/cartSlice";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import ProductCard from "../product-card/ProductCard";
 
 import "./categoryPreview.css";
 
 function CategoryPreview(props) {
+
+  const navigate = useNavigate()
+
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.value);
+  const currentUser = useSelector((state) => state.user.value);
 
   const addToCartClick = (productData) => {
-    const existingProduct = cartItems.find(
-      (product) => product?.id === productData.id
-    );
-
-    if (existingProduct) {
-      dispatch(addPresentItemsToCart(productData));
+    if (currentUser) {
+      const existingProduct = cartItems.find(
+        (product) => product?.id === productData.id
+      );
+  
+      if (existingProduct) {
+        dispatch(addPresentItemsToCart(productData));
+      } else {
+        dispatch(addNewItemsToCart(productData));
+      }
     } else {
-      dispatch(addNewItemsToCart(productData));
+      navigate("/authentication")
     }
+    
   };
 
   return (

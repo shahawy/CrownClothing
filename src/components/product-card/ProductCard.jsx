@@ -1,8 +1,10 @@
-import "./productCard.css";
-
 import Button from "../button/Button";
 
+import "./productCard.css";
+
+
 function ProductCard(props) {
+
   return (
     <div className="product-card-container">
       <img loading="lazy" src={props.image} alt="product-image" />

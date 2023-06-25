@@ -1,7 +1,9 @@
 import { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../../redux/userSlice"; 
+import { setCurrentUser } from "../../redux/userSlice";
+
+import { useNavigate } from "react-router-dom";
 
 import FormInput from "../form-input/FormInput";
 import Button from "../button/Button";
@@ -15,13 +17,14 @@ import {
 import "./signInForm.css";
 
 function SignInForm() {
+
   const [inputFields, setInputFields] = useState({
     email: "",
     password: "",
   });
 
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,6 +40,7 @@ function SignInForm() {
       );
 
       dispatch(setCurrentUser(user));
+      navigate("/")
 
       setInputFields({
         email: "",
@@ -58,6 +62,7 @@ function SignInForm() {
     const { user } = await signInWithGooglePopup(); // user: is the user information returned when the user sign in
     
     dispatch(setCurrentUser(user));
+    navigate("/")
 
     const userDocRef = await createUserDocumentFromAuth(user);
 
