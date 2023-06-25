@@ -1,20 +1,29 @@
-import { configureStore } from '@reduxjs/toolkit'
-import userReducer from "./userSlice"
-import cartReducer from "./cartSlice"
+// This is the configuration of the store if we want to persist some reducers
 
-export default configureStore({
-  reducer: {
-    user: userReducer,
-    cart: cartReducer
-  },
-})
+import { configureStore } from "@reduxjs/toolkit";
+import { rootReducer } from "./rootReducer"
+
+import { persistStore, persistReducer } from "redux-persist"  // This library saves the states in the store in the local storage to get them back on refreshing the page and not return the states to its initial value
+import storage from "redux-persist/lib/storage"  // This what accesses the local storage
 
 
+const persistConfig = {
+  key: "root",   // the name (any name doesn't matter)
+  storage: storage, 
+  whitelist: ["cart"]   // this is array of strings of the reducers or the the slice names that we want to persist, in our case we may persist the Cart slice only as we want it to persist on refreshing the page to save the products that the user has chosen, because User slice is handled by onAuthChanged() method of firebase and Categories Slice we don't need to persist it
+}
 
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>  // this middleware property to adjust the middlewars that comes by default with redux-toolkit, here we disabled the serializable check which requires the states to be in serializable form only which makes error for us in the state userSlice due to the unserializable form of object (the user's information) that returns from firebase when the user signs in
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});
 
-
-
+export const persistor = persistStore(store)
 
 /*
 // This is how "redux-persist" library works in the store file of redux

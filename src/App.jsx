@@ -19,6 +19,7 @@ const dispatch = useDispatch()
 
 useEffect(() => {
    const unsubscribe = onAuthStateChangedListener((user) => {
+    const pickedUser  = ({accessToken, email}) => ({accessToken, email})(user)
     dispatch(setCurrentUser(user))
    })
 
