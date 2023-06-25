@@ -1,21 +1,20 @@
-import { useEffect, useContext } from "react";
-import { CategoriesContext } from "../../contexts/CategoriesContext";
+import { useEffect } from "react";
+
+import { useDispatch } from "react-redux";
+import { fetchCategoriesData } from "../../redux/categoriesSlice";
 
 import { Routes, Route } from "react-router-dom";
 
 import CategoriesPreview from "../../components/categories-preview/CategoriesPreview";
 import Category from "../category/Category";
 
-import { getCategoriesAndDocuments } from "../../utilities/folder/Firebase";
-
 function Shop() {
 
-  const {setCategoriesMap} = useContext(CategoriesContext)
+  const dispatch = useDispatch()
 
   useEffect(() => {   // Function of fetching the data from the firestore database
     const getCategoriesMap = async () => {
-        const categoryMap = await getCategoriesAndDocuments('categories');
-        setCategoriesMap(categoryMap);
+        dispatch(fetchCategoriesData())
     }
 
     getCategoriesMap()

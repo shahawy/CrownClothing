@@ -1,8 +1,6 @@
 import { useParams } from "react-router-dom"; // useParams() hook gives you the access to URL parameters in React component in the form of Object
 
-import { useState, useEffect, useContext } from "react";
-
-import { CategoriesContext } from "../../contexts/CategoriesContext";
+import { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,16 +15,15 @@ import "./category.css";
 function Category() {
   const { category } = useParams(); // Destructure category property from the object returned from useParams()
 
-  const { categoriesMap } = useContext(CategoriesContext);
-
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.value);
+  const categories = useSelector((state) => state.categories.items)
 
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    setProducts(categoriesMap[category]);
-  }, [category, categoriesMap]);
+    setProducts(categories[category]);
+  }, [category, categories]);
 
   const addToCartClick = (productData) => {
     const existingProduct = cartItems.find(

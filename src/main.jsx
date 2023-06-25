@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 
 // import { UserProvider } from "./contexts/UserContext";
-import { CategoriesProvider } from "./contexts/CategoriesContext";
+// import { CategoriesProvider } from "./contexts/CategoriesContext";
 // import { CartProvider } from "./contexts/CartContext.jsx";
 
 import { Provider } from "react-redux";
@@ -21,11 +21,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <PersistGate persistor={persistor} loading={null}>
         <BrowserRouter>
           {/* <UserProvider> */}
-          <CategoriesProvider>
-            {/* <CartProvider> */}
-            <App />
-            {/* </CartProvider> */}
-          </CategoriesProvider>
+          {/* <CategoriesProvider> */}
+          {/* <CartProvider> */}
+          <App />
+          {/* </CartProvider> */}
+          {/* </CategoriesProvider> */}
           {/* </UserProvider> */}
         </BrowserRouter>
       </PersistGate>
