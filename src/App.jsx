@@ -6,7 +6,7 @@ import { setCurrentUser } from "./redux/userSlice";
 
 import { Routes, Route } from "react-router-dom";
 
-import NavigationBar from "./routes/navigationBar/Navigationbar";
+import NavigationBar from "./routes/navigationBar/NavigationBar";
 import Home from "./routes/home/Home";
 import Authentication from "./routes/authentication/Authentication";
 import Shop from "./routes/shop/Shop";
@@ -19,7 +19,6 @@ const dispatch = useDispatch()
 
 useEffect(() => {
    const unsubscribe = onAuthStateChangedListener((user) => {
-    const pickedUser  = ({accessToken, email}) => ({accessToken, email})(user)
     dispatch(setCurrentUser(user))
    })
 

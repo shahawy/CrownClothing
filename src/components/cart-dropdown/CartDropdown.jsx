@@ -1,6 +1,7 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleCartDropdown } from "../../redux/cartSlice";
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import CartItem from "../cart-item/CartItem";
 import Button from "../button/Button";
@@ -9,6 +10,14 @@ import "./cartDropdown.css";
 
 function CartDropdown() {
   const cartItems = useSelector((state) => state.cart.value);
+  const currentUser = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleCheckoutClick = () => {
+    dispatch(toggleCartDropdown());
+    currentUser ? navigate("/checkout") : navigate("/authentication");
+  };
 
   return (
     <div className="cart-dropdown-container">
@@ -32,9 +41,7 @@ function CartDropdown() {
         <p className="empty-message">Your Cart is empty</p>
       )}
 
-      <Link to="/checkout">
-        <Button buttonName="Go To Checkout" />
-      </Link>
+      <Button buttonName="Go To Checkout" onClick={handleCheckoutClick} />
     </div>
   );
 }

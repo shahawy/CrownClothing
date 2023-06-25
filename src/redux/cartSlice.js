@@ -4,6 +4,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState: {
     value: [],
+    isCartOpen: false,
   },
   reducers: {
     addPresentItemsToCart: (state, action) => {
@@ -38,7 +39,11 @@ export const cartSlice = createSlice({
 
     clearTheWholeCart: (state) => {
       state.value = []
-    }
+    },
+
+    toggleCartDropdown: (state) => {
+      state.isCartOpen = !state.isCartOpen
+    },
   },
 });
 
@@ -47,7 +52,8 @@ export const {
   addNewItemsToCart,
   clearItemsFromCart,
   removeItemsFromCart,
-  clearTheWholeCart
+  clearTheWholeCart,
+  toggleCartDropdown
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

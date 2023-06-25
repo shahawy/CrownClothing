@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../../redux/userSlice";
-import { clearTheWholeCart } from "../../redux/cartSlice"; 
+import { clearTheWholeCart, toggleCartDropdown } from "../../redux/cartSlice";
 
 import { Outlet, Link, useNavigate } from "react-router-dom";
 
@@ -15,10 +15,9 @@ import "./navigationBar.css"
 
 function NavigationBar() {
 
-  const [isCartOpen, setIsCartOpen] = useState(false)  // state responsible for showing the cart component on clicking the cart item
-
   const dispatch = useDispatch()
   const currentUser = useSelector((state) => state.user.value)
+  const isCartOpen = useSelector((state) => state.cart.isCartOpen)
 
   const navigate = useNavigate()
 
@@ -84,7 +83,7 @@ function NavigationBar() {
           </Link>
           }
 
-          <CartIcon handleDisplayCart={() => setIsCartOpen(!isCartOpen)} />
+          <CartIcon handleDisplayCart={() => dispatch(toggleCartDropdown())} />
 
         </div>
 
