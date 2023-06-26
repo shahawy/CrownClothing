@@ -6,7 +6,7 @@ import { clearTheWholeCart, toggleCartDropdown } from "../../redux/cartSlice";
 
 import { Outlet, Link, useNavigate } from "react-router-dom";
 
-import { signOutUser } from "../../utilities/folder/Firebase";
+import { signOutUser } from "../../utilities/firebase/firebase";
 
 import CartIcon from "../../components/cart-icon/CartIcon";
 import CartDropdown from "../../components/cart-dropdown/CartDropdown";

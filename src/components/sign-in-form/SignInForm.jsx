@@ -12,7 +12,7 @@ import {
   loginUserWithEmailAndPassword,
   signInWithGooglePopup,
   createUserDocumentFromAuth,
-} from "../../utilities/folder/Firebase";
+} from "../../utilities/firebase/firebase";
 
 import "./signInForm.css";
 

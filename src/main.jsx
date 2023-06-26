@@ -13,6 +13,9 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store.js";
 import { PersistGate } from "redux-persist/integration/react"; // This component wraps <App /> inside <Provider /> to apply persisting for redux
 
+import { Elements } from "@stripe/react-stripe-js" // The component that gives the payment card UI of stripe in React
+import { stripePromise } from "./utilities/stripe/stripe.js";
+
 import "./main.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -23,7 +26,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           {/* <UserProvider> */}
           {/* <CategoriesProvider> */}
           {/* <CartProvider> */}
-          <App />
+          <Elements stripe={stripePromise}>
+           <App />
+          </Elements>
           {/* </CartProvider> */}
           {/* </CategoriesProvider> */}
           {/* </UserProvider> */}

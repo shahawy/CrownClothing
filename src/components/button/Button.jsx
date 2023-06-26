@@ -3,7 +3,7 @@ import "./button.css"
 
 const BUTTON_TYPE_CLASSES = {   // Related to styling of the button
 google: "google-sign-in",
-inverted: "inverted"
+inverted: "inverted",
 }
 
 function Button({buttonName, buttonType, ...otherProps}) {

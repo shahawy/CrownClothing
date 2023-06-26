@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { onAuthStateChangedListener } from "./utilities/folder/Firebase";
+import { onAuthStateChangedListener } from "./utilities/firebase/firebase";
 
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "./redux/userSlice"; 

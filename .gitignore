@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Stripe Publishable key
+.env
+# Local Netlify folder
+.netlify

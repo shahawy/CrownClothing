@@ -11,7 +11,7 @@ import Button from "../button/Button";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
-} from "../../utilities/folder/Firebase";
+} from "../../utilities/firebase/firebase";
 
 import "./signUpForm.css"
 

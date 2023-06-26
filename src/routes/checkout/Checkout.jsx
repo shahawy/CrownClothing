@@ -1,17 +1,18 @@
 import {useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addPresentItemsToCart, removeItemsFromCart, clearItemsFromCart } from "../../redux/cartSlice";
+import { addPresentItemsToCart, removeItemsFromCart, clearItemsFromCart, setCartTotalPrice } from "../../redux/cartSlice";
 
 import CheckoutItem from "../../components/checkout-item/CheckoutItem";
+import PaymentForm from "../../components/payment-form/PaymentForm";
 
 import "./checkout.css";
 
 function Checkout() {
-  const [totalCartPrice, setTotalCartPrice] = useState(0);
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.value);
+  const cartTotalPrice = useSelector((state) => state.cart.cartTotalPrice);
 
 
   const clearItem = (productData) => {
@@ -35,7 +36,7 @@ function Checkout() {
       return accumulator + currentElement.quantity * currentElement.price;
     }, 0); // In .reduce, the second argument (0) is the initial state of the accumulator
 
-    setTotalCartPrice(totalPrice);
+    dispatch(setCartTotalPrice(totalPrice));
   }, [cartItems]);
 
   return (
@@ -73,7 +74,9 @@ function Checkout() {
         );
       })}
 
-      <span className="total">Total: ${totalCartPrice}</span>
+      <span className="total">Total: ${cartTotalPrice}</span>
+
+      <PaymentForm />
     </div>
   );
 }

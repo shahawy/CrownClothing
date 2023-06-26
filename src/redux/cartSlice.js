@@ -4,6 +4,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState: {
     value: [],
+    cartTotalPrice: 0,
     isCartOpen: false,
   },
   reducers: {
@@ -44,6 +45,10 @@ export const cartSlice = createSlice({
     toggleCartDropdown: (state) => {
       state.isCartOpen = !state.isCartOpen
     },
+
+    setCartTotalPrice: (state, action) => {
+      state.cartTotalPrice = action.payload
+    }
   },
 });
 
@@ -53,7 +58,8 @@ export const {
   clearItemsFromCart,
   removeItemsFromCart,
   clearTheWholeCart,
-  toggleCartDropdown
+  toggleCartDropdown,
+  setCartTotalPrice
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
