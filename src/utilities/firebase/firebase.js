@@ -54,7 +54,7 @@ export const database = getFirestore(firebaseApp);
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation) => {  // userAuth: is the user information returned when the user sign in, additionalInformation: To add information when using setDocs() as while Signing Up with email and password the displayName will be null it only comes with value with the Providers like Google, so we have to add the displayName value while Signing Up with email and password as we will see while using setDocs()
   if (!userAuth) return;  // To return nothing and doesn't complete the function if there is no user information (as if the user clicked the button and then he go back and didn't sign in)
 
-  const userDocRef = doc(database, "users", userAuth.uid); // users: is the name of the collection that we want to dsve the users documents in, userAuth.uid: the user's information returned when the user sign in has a unique id called (uid) we use it to identify the document
+  const userDocRef = doc(database, "users", userAuth.uid); // users: is the name of the collection that we want to save the users documents in, userAuth.uid: the user's information returned when the user sign in has a unique id called (uid) we use it to identify the document
   
   const userSnapshot = await getDoc(userDocRef);
 
