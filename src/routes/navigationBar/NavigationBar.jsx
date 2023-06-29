@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../../redux/userSlice";
 import { clearTheWholeCart, toggleCartDropdown } from "../../redux/cartSlice";
@@ -11,28 +9,28 @@ import { signOutUser } from "../../utilities/firebase/firebase";
 import CartIcon from "../../components/cart-icon/CartIcon";
 import CartDropdown from "../../components/cart-dropdown/CartDropdown";
 
-import "./navigationBar.css"
+import "./navigationBar.css";
 
 function NavigationBar() {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user.value);
+  const isCartOpen = useSelector((state) => state.cart.isCartOpen);
 
-  const dispatch = useDispatch()
-  const currentUser = useSelector((state) => state.user.value)
-  const isCartOpen = useSelector((state) => state.cart.isCartOpen)
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const signOutHandler = async () => {
-    await signOutUser()
+    await signOutUser();
     dispatch(setCurrentUser(null));
-    dispatch(clearTheWholeCart())
-    navigate("/")
-  }
+    dispatch(clearTheWholeCart());
+    navigate("/");
+  };
 
   return (
     <>
       <div className="navigation">
-        <Link className="logo-container" to="/">  {/* svg of the logo */}
-          <svg className="logo"
+        <Link className="logo-container" to="/">
+          <svg // svg of the logo
+            className="logo"
             width="50px"
             height="39px"
             viewBox="0 0 50 39"
@@ -76,21 +74,22 @@ function NavigationBar() {
             SHOP
           </Link>
 
-          {currentUser ? 
-            <span onClick={signOutHandler} className="nav-link">Sign Out</span> :
+          {currentUser ? (
+            <span onClick={signOutHandler} className="nav-link">
+              Sign Out
+            </span>
+          ) : (
             <Link className="nav-link" to="/authentication">
-            SIGN IN
-          </Link>
-          }
+              SIGN IN
+            </Link>
+          )}
 
           <CartIcon handleDisplayCart={() => dispatch(toggleCartDropdown())} />
-
         </div>
 
         {isCartOpen && <CartDropdown />}
-
       </div>
-      
+
       <Outlet />
     </>
   );

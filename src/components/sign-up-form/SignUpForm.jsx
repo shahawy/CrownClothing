@@ -24,6 +24,8 @@ function SignUpForm() {
     confirmPassword: "",
   });
 
+  const [loading, setLoading] = useState(false)  // To disable the button after submitting until submission is completed
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -36,6 +38,7 @@ function SignUpForm() {
     e.preventDefault();
     if (formFields.password === formFields.confirmPassword) {
       try {
+        setLoading(true)
         const { user } = await createAuthUserWithEmailAndPassword(
           // user: is the user information returned when the user sign in
           formFields.email,
@@ -43,11 +46,12 @@ function SignUpForm() {
         );
    
         dispatch(setCurrentUser(user));
-        navigate("/")
 
         const userDocRef = await createUserDocumentFromAuth(user, {
           displayName: formFields.displayName,
         }); // The object in the second argument: To add information when using setDocs() as while Signing Up with email and password the displayName will be null it only comes with value with the Providers like Google, so we have to add the displayName value while Signing Up with email and password as we will see while using setDocs()
+
+        navigate("/")
 
         setFormFields({
           displayName: "",
@@ -62,6 +66,8 @@ function SignUpForm() {
           console.error(err);
         }
       }
+
+      setLoading(false)
     } else {
       alert("Passwords doesn't match");
     }
@@ -108,6 +114,7 @@ function SignUpForm() {
         <Button 
           buttonName="Sign Up"
           type="submit"
+          disabled={loading}
         />
       </form>
     </div>

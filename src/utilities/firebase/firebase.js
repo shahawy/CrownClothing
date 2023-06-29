@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, query, getDocs } from "firebase/firestore"; // doc: used to specify the document in which collection by the id, getDoc: used to retrieve the required document, setDoc: used to addDoc
 
 const firebaseConfig = {
@@ -37,6 +37,8 @@ export const loginUserWithEmailAndPassword = async (email, password) => {  // Fu
 }
 
 export const signOutUser = async () => await signOut(auth)  // Function used to log out user
+
+export const resetPassword = async (email) => await sendPasswordResetEmail(auth, email)
 
 export const onAuthStateChangedListener = (callbackFunction) => onAuthStateChanged(auth, callbackFunction);
 /* Function makes the user still logged in on refreshing the page, as this method watches the Authentication process 
