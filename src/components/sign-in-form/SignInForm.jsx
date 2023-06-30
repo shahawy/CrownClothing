@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../redux/userSlice";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import FormInput from "../form-input/FormInput";
 import Button from "../button/Button";
@@ -42,9 +42,9 @@ function SignInForm() {
         inputFields.password
       );
 
-      dispatch(setCurrentUser(user));
       navigate("/")
-
+      dispatch(setCurrentUser(user));
+      
       setInputFields({
         email: "",
         password: "",
@@ -67,11 +67,11 @@ function SignInForm() {
     setLoading(true)
     const { user } = await signInWithGooglePopup(); // user: is the user information returned when the user sign in
     
+    navigate("/")
     dispatch(setCurrentUser(user));
 
-    const userDocRef = await createUserDocumentFromAuth(user);
-
-    navigate("/")
+    await createUserDocumentFromAuth(user);
+ 
     setLoading(false)
   };
 
@@ -84,7 +84,7 @@ function SignInForm() {
         <FormInput
           label="Email"
           handleChange={handleChange}
-          type="text"
+          type="email"
           name="email"
           value={inputFields.email}
         />
@@ -108,6 +108,8 @@ function SignInForm() {
           />
         </div>
       </form>
+
+      <Link to="forgot-password" className="forgot-password">Forgot Password ?</Link>
     </div>
   );
 }

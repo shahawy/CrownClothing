@@ -11,6 +11,7 @@ import Spinner from "./components/spinner/Spinner";
 const NavigationBar = lazy(() => import("./routes/navigationBar/NavigationBar"))
 const Home = lazy(() => import("./routes/home/Home"))
 const Authentication = lazy(() => import("./routes/authentication/Authentication"))
+const ForgotPassword = lazy(() => import("./routes/forgotPassword/ForgotPassword"))
 const Shop = lazy(() => import("./routes/shop/Shop"))
 const Checkout = lazy(() => import("./routes/checkout/Checkout"))
 
@@ -36,6 +37,7 @@ useEffect(() => {  // The firebase method that watches the Authentication state 
         <Route path="/" element={<NavigationBar />}>
           <Route index element={<Home />} />    {/* index: means that this component is displayed with the the parent Route by default */}
           <Route path="authentication" element={<Authentication />} />
+          <Route path="/authentication/forgot-password" element={<ForgotPassword />} />
           <Route path="shop/*" element={<Shop />} />  {/* This path means that whatever has path of shop/(anything) render the <Shop /> component */}
           <Route path="checkout" element={<Checkout />} />
         </Route>

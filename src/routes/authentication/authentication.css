@@ -3,4 +3,7 @@
   justify-content: space-between;
   width: 900px;
   margin: 30px auto;
+}
+.authentication-container .already-signed-in {
+  margin: auto;
 }/*# sourceMappingURL=authentication.css.map */

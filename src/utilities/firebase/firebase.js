@@ -38,7 +38,7 @@ export const loginUserWithEmailAndPassword = async (email, password) => {  // Fu
 
 export const signOutUser = async () => await signOut(auth)  // Function used to log out user
 
-export const resetPassword = async (email) => await sendPasswordResetEmail(auth, email)
+export const resetPassword = async (email) => await sendPasswordResetEmail(auth, email)  // Function used to reset user's password
 
 export const onAuthStateChangedListener = (callbackFunction) => onAuthStateChanged(auth, callbackFunction);
 /* Function makes the user still logged in on refreshing the page, as this method watches the Authentication process 
@@ -106,3 +106,13 @@ export const getCategoriesAndDocuments = async () => {
 
   return categoryMap;
 };
+
+
+// This is the way to get the additional information we store in the users collection in Firestore when the user registers
+
+ /* export const getUserDoc = async (userAuth) => {
+ const userDocRef = doc(database, "users", userAuth.uid);
+ const document = await getDoc(userDocRef)
+ const displayName = document._document.data.value.mapValue.fields.displayName.stringValue
+ console.log(displayName);
+}  */

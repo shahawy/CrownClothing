@@ -45,14 +45,13 @@ function SignUpForm() {
           formFields.password
         );
    
+        navigate("/")
         dispatch(setCurrentUser(user));
 
-        const userDocRef = await createUserDocumentFromAuth(user, {
+        await createUserDocumentFromAuth(user, {
           displayName: formFields.displayName,
         }); // The object in the second argument: To add information when using setDocs() as while Signing Up with email and password the displayName will be null it only comes with value with the Providers like Google, so we have to add the displayName value while Signing Up with email and password as we will see while using setDocs()
-
-        navigate("/")
-
+           
         setFormFields({
           displayName: "",
           email: "",
