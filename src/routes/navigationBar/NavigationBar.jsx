@@ -76,7 +76,7 @@ function NavigationBar() {
 
           {currentUser ? (
             <span onClick={signOutHandler} className="nav-link">
-              Sign Out
+              SIGN OUT
             </span>
           ) : (
             <Link className="nav-link" to="/authentication">
