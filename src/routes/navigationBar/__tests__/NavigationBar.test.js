@@ -1,6 +1,6 @@
 // Testing components that rely on redux
 
-import { screen } from "@testing-library/react";
+import { screen, fireEvent, waitFor } from "@testing-library/react";  // waitFor: is used when testing functions that are waiting asynchronus functions to be completed
 
 // We no longer use render of @testing-library/react, we use our custom render for redux
 import { renderWithProviders } from "../../../utilities/tests/test-utils";
@@ -95,6 +95,26 @@ describe("Test Navigation Bar", () => {
     const emptyCartElement = screen.getByText("Your Cart is empty");
     expect(emptyCartElement).toBeInTheDocument();    // To be sure that Cart is empty when there is no items in it
   });
+
+
+  test("Should dispatch setCurrentUser and clearTheWholeCart actions on clicking the SIGN OUT link", async () => {
+    const {store} = renderWithProviders(<NavigationBar />, {
+      preloadedState: {
+        user: {
+          value: {}  // To be sure that SIGN OUT is rendered
+        }
+      }
+    })
+
+    const signOutLinkElement = screen.getByText("SIGN OUT")
+    fireEvent.click(signOutLinkElement)
+
+    await waitFor(() => {
+    expect(store.getState().user.value).toBeNull()
+    expect(store.getState().cart.value).toEqual([])
+    })
+  })
+
 });
 
   
