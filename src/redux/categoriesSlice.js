@@ -11,7 +11,7 @@ export const fetchCategoriesData = createAsyncThunk('categories/fetchData', asyn
   const categoriesSlice = createSlice({
     name: 'categories',
     initialState: { 
-      items: [],
+      items: {},
       status: 'idle',
       error: null,
     },

@@ -6,6 +6,7 @@ import { screen, fireEvent, waitFor } from "@testing-library/react";  // waitFor
 import { renderWithProviders } from "../../../utilities/tests/test-utils";
 
 import NavigationBar from "../NavigationBar";
+import * as reactRedux from 'react-redux';
 
 
 describe("Test Navigation Bar", () => {
