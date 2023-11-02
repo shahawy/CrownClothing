@@ -18,3 +18,13 @@ a {
 * {
   box-sizing: border-box;
 }/*# sourceMappingURL=main.css.map */
+
+
+.nested-route {
+  border-right: 1px solid black;
+  display: inline-block;
+}
+
+.collection-div {
+  margin-left: 100px;
+}
