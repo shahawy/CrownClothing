@@ -21,7 +21,7 @@ import { stripePromise } from "./utilities/stripe/stripe.js";
 import "./main.css";
 
 
-ReactGA.initialize("your GA measurement id");
+ReactGA.initialize("G-9SMSBNBJ50");
 
 // Need to know how to add more hit types like "scroll", which Captures scroll events each time a visitor gets to the bottom of a page 
 ReactGA.send({ hitType: "pageview", page: window.location.pathname});
