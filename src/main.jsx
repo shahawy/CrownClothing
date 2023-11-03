@@ -32,10 +32,7 @@ const handleScroll = () => {
 };
 
 useEffect(() => {
-  document.addEventListener("scroll", handleScroll);
-  return () => {
-    document.removeEventListener("scroll", handleScroll);
-  };
+  console.log("knkl");
 }, []);
 
 
