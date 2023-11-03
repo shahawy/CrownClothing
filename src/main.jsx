@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 
 import ReactDOM from "react-dom/client";
 
@@ -34,7 +34,7 @@ const handleScroll = () => {
 };
 
 
-useEffect(() => {
+React.useEffect(() => {
   document.addEventListener("scroll", handleScroll);
   return () => {
     document.removeEventListener("scroll", handleScroll);
