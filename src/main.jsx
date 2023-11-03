@@ -24,24 +24,6 @@ import "./main.css";
 // This key should be in .env
 ReactGA.initialize("G-9SMSBNBJ50");
 
-
-const handleScroll = () => {
-  // Track the scroll event
-  ReactGA.event({
-    category: "Scroll",
-    action: "Scrolled to bottom of page",
-  });
-};
-
-
-React.useEffect(() => {
-  document.addEventListener("scroll", handleScroll);
-  return () => {
-    document.removeEventListener("scroll", handleScroll);
-  };
-}, []);
-
-
 // Need to know how to add more hit types like "scroll", which Captures scroll events each time a visitor gets to the bottom of a page 
 ReactGA.send({ hitType: "pageview", page: window.location.pathname});
 

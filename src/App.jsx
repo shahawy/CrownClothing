@@ -8,6 +8,8 @@ import { Routes, Route } from "react-router-dom";
 
 import Spinner from "./components/spinner/Spinner";
 
+import ReactGA from "react-ga4";  // For Google Analytics
+
 const NavigationBar = lazy(() => import("./routes/navigationBar/NavigationBar"))
 const Home = lazy(() => import("./routes/home/Home"))
 const Authentication = lazy(() => import("./routes/authentication/Authentication"))
@@ -29,6 +31,23 @@ useEffect(() => {  // The firebase method that watches the Authentication state 
 
    return unsubscribe  // To make the code run once when the component mounts to avoid memory leaks as onAuthStateChanged() method already listens for any changes in the user's Authentication state
 }, [])
+
+
+const handleScroll = () => {
+  // Track the scroll event
+  ReactGA.event({
+    category: "Scroll",
+    action: "Scrolled to bottom of page",
+  });
+};
+
+
+useEffect(() => {
+  document.addEventListener("scroll", handleScroll);
+  return () => {
+    document.removeEventListener("scroll", handleScroll);
+  };
+}, []);
 
   return (
     <Suspense fallback={<Spinner />}>
