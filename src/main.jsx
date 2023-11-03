@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 
 import { BrowserRouter } from "react-router-dom";
@@ -20,7 +19,6 @@ import { Elements } from "@stripe/react-stripe-js" // The component that gives t
 import { stripePromise } from "./utilities/stripe/stripe.js";
 
 import "./main.css";
-
 
 // This key should be in .env
 ReactGA.initialize("G-9SMSBNBJ50");
