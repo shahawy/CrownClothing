@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 
 import { BrowserRouter } from "react-router-dom";
@@ -20,8 +20,27 @@ import { stripePromise } from "./utilities/stripe/stripe.js";
 
 import "./main.css";
 
-
+// This key should be in .env
 ReactGA.initialize("G-9SMSBNBJ50");
+
+
+const trackScrollEvent = () => {
+  const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+
+  if (scrollPosition + windowHeight >= documentHeight) {
+    ReactGA.send({ hitType: "event", eventCategory: "Scroll", eventAction: "Page Bottom" });
+  }
+};
+
+useEffect(() => {
+  window.addEventListener("scroll", trackScrollEvent);
+  return () => {
+    window.removeEventListener("scroll", trackScrollEvent);
+  };
+}, []);
+
 
 // Need to know how to add more hit types like "scroll", which Captures scroll events each time a visitor gets to the bottom of a page 
 ReactGA.send({ hitType: "pageview", page: window.location.pathname});
