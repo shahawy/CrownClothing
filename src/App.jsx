@@ -33,15 +33,7 @@ useEffect(() => {  // The firebase method that watches the Authentication state 
 }, [])
 
 
-const handleScroll = () => {
-  // Track the scroll event
-  ReactGA.event({
-    category: "Scroll",
-    action: "Scrolled to bottom of page",
-  });
-};
-
-
+// Track the scroll to bottom event in Google Analysis
 const trackScrollEvent = () => {
   const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
   const windowHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -52,13 +44,13 @@ const trackScrollEvent = () => {
   }
 };
 
-
 useEffect(() => {
   document.addEventListener("scroll", trackScrollEvent);
   return () => {
     document.removeEventListener("scroll", trackScrollEvent);
   };
 }, []);
+
 
   return (
     <Suspense fallback={<Spinner />}>
