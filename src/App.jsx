@@ -42,10 +42,21 @@ const handleScroll = () => {
 };
 
 
+const trackScrollEvent = () => {
+  const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+
+  if (scrollPosition + windowHeight >= documentHeight) {
+    ReactGA.send({ hitType: "event", eventCategory: "Scroll", eventAction: "Page Bottom" });
+  }
+};
+
+
 useEffect(() => {
-  document.addEventListener("scroll", handleScroll);
+  document.addEventListener("scroll", trackScrollEvent);
   return () => {
-    document.removeEventListener("scroll", handleScroll);
+    document.removeEventListener("scroll", trackScrollEvent);
   };
 }, []);
 
