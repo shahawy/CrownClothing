@@ -23,13 +23,13 @@ import "./main.css";
 // This key should be in .env
 ReactGA.initialize("G-9SMSBNBJ50");
 
-const handleScroll = () => {
-  // Track the scroll event
-  ReactGA.event({
-    category: "Scroll",
-    action: "Scrolled to bottom of page",
-  });
-};
+// const handleScroll = () => {
+//   // Track the scroll event
+//   ReactGA.event({
+//     category: "Scroll",
+//     action: "Scrolled to bottom of page",
+//   });
+// };
 
 useEffect(() => {
   console.log("knkl");
