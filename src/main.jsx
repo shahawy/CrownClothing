@@ -23,21 +23,18 @@ import "./main.css";
 // This key should be in .env
 ReactGA.initialize("G-9SMSBNBJ50");
 
-
-const trackScrollEvent = () => {
-  const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-  const documentHeight = document.documentElement.scrollHeight;
-
-  if (scrollPosition + windowHeight >= documentHeight) {
-    ReactGA.send({ hitType: "event", eventCategory: "Scroll", eventAction: "Page Bottom" });
-  }
+const handleScroll = () => {
+  // Track the scroll event
+  ReactGA.event({
+    category: "Scroll",
+    action: "Scrolled to bottom of page",
+  });
 };
 
 useEffect(() => {
-  window.addEventListener("scroll", trackScrollEvent);
+  document.addEventListener("scroll", handleScroll);
   return () => {
-    window.removeEventListener("scroll", trackScrollEvent);
+    document.removeEventListener("scroll", handleScroll);
   };
 }, []);
 
