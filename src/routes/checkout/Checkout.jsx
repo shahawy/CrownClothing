@@ -1,34 +1,31 @@
 import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addPresentItemsToCart,
-  removeItemsFromCart,
-  clearItemsFromCart,
-  setCartTotalPrice,
-} from "../../redux/cartSlice";
+import { addPresentItemsToCart, removeItemsFromCart, clearItemsFromCart, setCartTotalPrice } from "../../redux/cartSlice";
 
 import CheckoutItem from "../../components/checkout-item/CheckoutItem";
 import PaymentForm from "../../components/payment-form/PaymentForm";
 
-import ReactGA from "react-ga4"; // For Google Analytics
+import ReactGA from "react-ga4";  // For Google Analytics
 
 import "./checkout.css";
 
 function Checkout() {
+
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.value);
   const cartTotalPrice = useSelector((state) => state.cart.cartTotalPrice);
 
+
   const clearItem = (productData) => {
-    dispatch(clearItemsFromCart(productData));
+    dispatch(clearItemsFromCart(productData))
   };
 
   const decreaseQuantity = (productData) => {
     if (productData.quantity > 1) {
-      dispatch(removeItemsFromCart(productData));
+      dispatch(removeItemsFromCart(productData))
     } else {
-      dispatch(clearItemsFromCart(productData));
+      dispatch(clearItemsFromCart(productData))
     }
   };
 
@@ -46,31 +43,27 @@ function Checkout() {
 
 
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search,"New Checkout Page");
-  }, []);
+    ReactGA.send({ hitType: "pageview", title: "Checkout Page Finally"});
+  }, [])
 
   // Track the scroll to bottom event in Google Analysis
-  const trackScrollEvent = () => {
-    const scrollPosition =
-      window.pageYOffset || document.documentElement.scrollTop;
-    const windowHeight =
-      window.innerHeight || document.documentElement.clientHeight;
-    const documentHeight = document.documentElement.scrollHeight;
+const trackScrollEvent = () => {
+  const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  const documentHeight = document.documentElement.scrollHeight;
 
-    if (scrollPosition + windowHeight - 450 >= documentHeight) {
-      ReactGA.event({
-        category: "Scroll",
-        action: "Scrolled to bottom in Checkout",
-      });
-    }
+  if (scrollPosition + windowHeight - 450 >= documentHeight) {
+    ReactGA.send({ hitType: "event", eventCategory: "Scroll", eventAction: "Scrolled to the Bottom in Checkout" });
+  }
+};
+
+useEffect(() => {
+  document.addEventListener("scroll", trackScrollEvent);
+  return () => {
+    document.removeEventListener("scroll", trackScrollEvent);
   };
+}, []);
 
-  useEffect(() => {
-    document.addEventListener("scroll", trackScrollEvent);
-    return () => {
-      document.removeEventListener("scroll", trackScrollEvent);
-    };
-  }, []);
 
   return (
     <div className="checkout-container">
