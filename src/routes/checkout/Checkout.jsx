@@ -10,6 +10,10 @@ import ReactGA from "react-ga4";  // For Google Analytics
 
 import "./checkout.css";
 
+
+
+ReactGA.send({ hitType: "pageview", title: "Checkout Page Finally"});
+
 function Checkout() {
 
   const dispatch = useDispatch();
@@ -42,9 +46,6 @@ function Checkout() {
   }, [cartItems]);
 
 
-  useEffect(() => {
-    ReactGA.send({ hitType: "pageview", title: "Checkout Page Finally"});
-  }, [])
 
   // Track the scroll to bottom event in Google Analysis
 const trackScrollEvent = () => {
