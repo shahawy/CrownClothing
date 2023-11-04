@@ -23,6 +23,9 @@ function Shop() {
   }, []);
 
 
+  ReactGA.send({ hitType: "pageview", title: "Shop Page Finally"});
+
+
   // Track the scroll to bottom event in Google Analysis
 const trackScrollEvent = () => {
   const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
