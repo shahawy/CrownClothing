@@ -8,7 +8,6 @@ import { Routes, Route } from "react-router-dom";
 import CategoriesPreview from "../../components/categories-preview/CategoriesPreview";
 import Category from "../category/Category";
 
-import ReactGA from "react-ga4";  // For Google Analytics
 
 function Shop() {
 
@@ -23,7 +22,7 @@ function Shop() {
   }, []);
 
 
-  ReactGA.send({ hitType: "pageview", title: "Shop Page Finally"});
+  // ReactGA.send({ hitType: "pageview", title: "Shop Page Finally"});
 
 
   // Track the scroll to bottom event in Google Analysis
@@ -33,7 +32,7 @@ const trackScrollEvent = () => {
   const documentHeight = document.documentElement.scrollHeight;
 
   if (scrollPosition + windowHeight - 450 >= documentHeight) {
-    ReactGA.event({ category: "Scroll", action: "Scrolled to bottom in Shop", });
+    ReactGA.send({ hitType: "Scroll", title: "Scrolled to bottom in Shop", });
   }
 };
 
