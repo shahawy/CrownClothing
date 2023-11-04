@@ -10,7 +10,7 @@ import ReactGA from "react-ga4";  // For Google Analytics
 import "./authentication.css";
 
 
-// ReactGA.send({ hitType: "pageview", page: "/authentication", title: "Authentication Page Finally"});
+ReactGA.send({ hitType: "pageview", page: "/authentication", title: "Authentication Page Mounted"});
 
 
 function Authentication() {

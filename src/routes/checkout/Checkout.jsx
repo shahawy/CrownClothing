@@ -12,7 +12,7 @@ import "./checkout.css";
 
 
 
-// ReactGA.send({ hitType: "pageview", page: "/checkout", title: "Checkout Page Finally"});
+ReactGA.send({ hitType: "pageview", title: "Checkout Page Mounted"});
 
 function Checkout() {
 
