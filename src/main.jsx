@@ -29,6 +29,7 @@ ReactGA.initialize("G-9SMSBNBJ50");
 // ReactGA.send({ hitType: "pageview", page: window.location.pathname});
 
 ReactGA.send({ hitType: "Checkout page viewed", page: "/checkout"});
+ReactGA.send({ hitType: "Authentication page viewed", page: "/authentication"});
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
