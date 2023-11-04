@@ -46,7 +46,7 @@ function Checkout() {
 
 
   useEffect(() => {
-    ReactGA.pageview("New Checkout Page");
+    ReactGA.pageview(window.location.pathname + window.location.search,"New Checkout Page");
   }, []);
 
   // Track the scroll to bottom event in Google Analysis

@@ -15,7 +15,7 @@ function Authentication() {
 
   
   useEffect(() => {
-    ReactGA.pageview("New Authentication Page");
+    ReactGA.pageview(window.location.pathname + window.location.search,"New Authentication Page");
   }, []);
 
   // Track the scroll to bottom event in Google Analysis
