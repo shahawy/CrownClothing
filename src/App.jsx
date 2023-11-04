@@ -8,7 +8,6 @@ import { Routes, Route } from "react-router-dom";
 
 import Spinner from "./components/spinner/Spinner";
 
-import ReactGA from "react-ga4";  // For Google Analytics
 
 const NavigationBar = lazy(() => import("./routes/navigationBar/NavigationBar"))
 const Home = lazy(() => import("./routes/home/Home"))
@@ -31,25 +30,6 @@ useEffect(() => {  // The firebase method that watches the Authentication state 
 
    return unsubscribe  // To make the code run once when the component mounts to avoid memory leaks as onAuthStateChanged() method already listens for any changes in the user's Authentication state
 }, [])
-
-
-// Track the scroll to bottom event in Google Analysis
-const trackScrollEvent = () => {
-  const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-  const documentHeight = document.documentElement.scrollHeight;
-
-  if (scrollPosition + windowHeight >= documentHeight) {
-    ReactGA.send({ hitType: "event", eventCategory: "Scroll", eventAction: "Scrolled to the Bottom of the Page" });
-  }
-};
-
-useEffect(() => {
-  document.addEventListener("scroll", trackScrollEvent);
-  return () => {
-    document.removeEventListener("scroll", trackScrollEvent);
-  };
-}, []);
 
 
   return (
