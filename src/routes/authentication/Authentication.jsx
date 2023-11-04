@@ -25,7 +25,7 @@ function Authentication() {
       window.innerHeight || document.documentElement.clientHeight;
     const documentHeight = document.documentElement.scrollHeight;
 
-    if (scrollPosition + windowHeight - 450 >= documentHeight) {
+    if (scrollPosition + windowHeight >= documentHeight) {
       ReactGA.event({
         category: "Scroll",
         action: "Scrolled to bottom in Authentication",
