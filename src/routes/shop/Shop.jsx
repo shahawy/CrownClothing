@@ -33,7 +33,7 @@ const trackScrollEvent = () => {
   const documentHeight = document.documentElement.scrollHeight;
 
   if (scrollPosition + windowHeight - 450 >= documentHeight) {
-    ReactGA.send({ hitType: "event", eventCategory: "Scroll", eventAction: "Scrolled to the Bottom in shop" });
+    ReactGA.event({ category: "Scroll", action: "Scrolled to bottom in Shop", });
   }
 };
 
