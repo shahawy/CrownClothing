@@ -25,9 +25,10 @@ import "./main.css";
 // This key should be in .env
 ReactGA.initialize("G-9SMSBNBJ50");
 
-// Need to know how to add more hit types like "scroll", which Captures scroll events each time a visitor gets to the bottom of a page 
 // Tracking the scroll to bottom event of Google Analysis is in the App component because it needs useEffect hook, so it should be in a react component
-ReactGA.send({ hitType: "pageview", page: window.location.pathname});
+// ReactGA.send({ hitType: "pageview", page: window.location.pathname});
+
+ReactGA.send({ hitType: "Checkout page viewed", page: "/checkout"});
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
