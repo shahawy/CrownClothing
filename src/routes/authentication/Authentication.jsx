@@ -15,7 +15,7 @@ function Authentication() {
 
 
   useEffect(() => {
-    ReactGA.send({ hitType: "pageview", page: "/authentication", title: "Authentication Page Mounted"});
+    ReactGA.send({ hitType: "pageview", title: "Authentication Page Mounted"});
   }, [])
 
   // Track the scroll to bottom event in Google Analysis

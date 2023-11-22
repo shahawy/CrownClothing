@@ -4,17 +4,21 @@ import { useSelector } from "react-redux";
 import "./cartIcon.css";
 
 function CartIcon(props) {
-  const cartItems = useSelector(state => state.cart.value)
+  const cartItems = useSelector((state) => state.cart.value);
   const [cartItemsNumber, setCartItemsNumber] = useState(0);
 
-  useEffect(() => {   // Function in which we used .reduce method to get the total quantity of the in the cart
-      const quantity = cartItems?.reduce((accumulator, currentItem) =>  accumulator + currentItem.quantity, 0); // 0: the initial value while using .reduce method
-      setCartItemsNumber(quantity);   
+  useEffect(() => {
+    // Function in which we used .reduce method to get the total quantity of the in the cart
+    const quantity = cartItems?.reduce(
+      (accumulator, currentItem) => accumulator + currentItem.quantity,
+      0
+    ); // 0: the initial value while using .reduce method
+    setCartItemsNumber(quantity);
   }, [cartItems]);
 
   return (
     <div className="cart-icon-container" onClick={props.handleDisplayCart}>
-      <svg    // svg of the cart icon
+      <svg // svg of the cart icon
         className="shopping-icon"
         version="1.1"
         id="Capa_1"
