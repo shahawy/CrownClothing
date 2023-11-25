@@ -28,7 +28,7 @@ ReactGA.initialize("G-9SMSBNBJ50");
 // Tracking the scroll to bottom event of Google Analysis is in the App component because it needs useEffect hook, so it should be in a react component
 ReactGA.send({ hitType: "pageview", page: window.location.pathname});
 
-console.log( window.location.pathname);
+// console.log( window.location.pathname);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>

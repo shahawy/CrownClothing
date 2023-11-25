@@ -1,5 +1,8 @@
 .checkout-container {
-  width: 55%;
+  background-color: white;
+  /* width: 55%; */
+  width: 75%;
+  padding: 60px;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
