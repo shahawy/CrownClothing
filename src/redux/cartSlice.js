@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { toast, Toaster } from "react-hot-toast";
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -23,6 +25,7 @@ export const cartSlice = createSlice({
     },
 
     clearItemsFromCart: (state, action) => {
+      toast.success(action.payload.name + " removed from cart")
       const productData = action.payload;
       state.value = state.value.filter((cartItem) => {
         return cartItem.id !== productData.id;
@@ -38,7 +41,7 @@ export const cartSlice = createSlice({
       });
     },
 
-    clearTheWholeCart: (state) => {
+    clearTheWholeCart: (state) => {      
       state.value = []
     },
 

@@ -16,6 +16,8 @@ const ForgotPassword = lazy(() => import("./routes/forgotPassword/ForgotPassword
 const Shop = lazy(() => import("./routes/shop/Shop"))
 const Checkout = lazy(() => import("./routes/checkout/Checkout"))
 
+const MenCategories = lazy(() => import("./routes/menCategories/MenCategories"))
+const WomenCategories = lazy(() => import("./routes/womenCategories/WomenCategories"))
 
 const App = () => {
 
@@ -42,6 +44,9 @@ useEffect(() => {  // The firebase method that watches the Authentication state 
           <Route path="/authentication/forgot-password" element={<ForgotPassword />} />
           <Route path="shop/*" element={<Shop />} />  {/* This path means that whatever has path of shop/(anything) render the <Shop /> component */}
           <Route path="checkout" element={<Checkout />} />
+
+          <Route path="men-categories" element={<MenCategories />} />
+          <Route path="women-categories" element={<WomenCategories />} />
         </Route>
       </Routes>
     )}
