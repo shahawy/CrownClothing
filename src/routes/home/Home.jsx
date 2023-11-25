@@ -2,21 +2,21 @@ import Directory from '../../components/directory/Directory';
 
 function Home() {
   const categories = [
-    {
-      id: 1,
-      title: 'hats',
-      imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-    },
-    {
-      id: 2,
-      title: 'jackets',
-      imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-    },
-    {
-      id: 3,
-      title: 'sneakers',
-      imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-    },
+    // {
+    //   id: 1,
+    //   title: 'hats',
+    //   imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+    // },
+    // {
+    //   id: 2,
+    //   title: 'jackets',
+    //   imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+    // },
+    // {
+    //   id: 3,
+    //   title: 'sneakers',
+    //   imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+    // },
     {
       id: 4,
       title: 'womens',
@@ -29,7 +29,10 @@ function Home() {
     },
   ];
 
-  return <Directory categories={categories} />;
+  // Temporary
+  const navigation = "categories"
+
+  return <Directory categories={categories} navigation={navigation} class="directory-item-container" />;
 };
 
 export default Home

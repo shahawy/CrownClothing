@@ -1,0 +1,14 @@
+.container-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.err-message {
+    color: red;
+}

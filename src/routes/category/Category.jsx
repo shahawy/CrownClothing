@@ -10,6 +10,8 @@ import {
 
 import ProductCard from "../../components/product-card/ProductCard";
 
+import { toast, Toaster } from "react-hot-toast";
+
 import "./category.css";
 
 function Category() {
@@ -39,6 +41,8 @@ function Category() {
       } else {
         dispatch(addNewItemsToCart(productData));
       }
+
+      toast.success(productData.name + " added to cart")
     } else {
       navigate("/authentication")
     }
@@ -47,6 +51,7 @@ function Category() {
 
   return (
     <>
+    <Toaster />
       <h2 className="category-title">{category.toUpperCase()}</h2>
       <div className="category-container">
         {products?.map((product) => {

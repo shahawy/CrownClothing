@@ -7,8 +7,8 @@ function DirectoryItem(props) {
 
   return (
     <div
-      onClick={() => navigate(`/shop/${props.title}`)}
-      className="directory-item-container"
+      onClick={() => navigate(props.navigation)}  // Temporary
+      className={props.class}
     >
       <div
         className="background-image"
