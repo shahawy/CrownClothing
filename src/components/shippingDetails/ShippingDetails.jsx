@@ -63,86 +63,6 @@ function ShippingDetails(props) {
     }
   }, []);
 
-  const handlePayOnDelivery = () => {
-    const formValues = getValues();
-    let hasErrors = false;
-    // console.log(formValues);
-
-    if (formValues.firstName === "") {
-      setError("firstName", {
-        type: "manual",
-        message: "First Name is required",
-      });
-      hasErrors = true;
-    }
-    if (formValues.lastName === "") {
-      setError("lastName", {
-        type: "manual",
-        message: "Last Name is required",
-      });
-      hasErrors = true;
-    }
-    if (formValues.phoneNumber === "") {
-      setError("phoneNumber", {
-        type: "manual",
-        message: "Phone Number is required",
-      });
-      hasErrors = true;
-    }
-    if (formValues.streetName === "") {
-      setError("streetName", {
-        type: "manual",
-        message: "street is required",
-      });
-      hasErrors = true;
-    }
-    if (formValues.buildingNo === "") {
-      setError("buildingNo", {
-        type: "manual",
-        message: "Building Number is required",
-      });
-      hasErrors = true;
-    }
-    if (formValues.appartmentNo === "") {
-      setError("appartmentNo", {
-        type: "manual",
-        message: "Appartment Number is required",
-      });
-      hasErrors = true;
-    }
-    if (formValues.country === "Choose Country") {
-      setError("country", {
-        type: "manual",
-        message: "Country is required",
-      });
-      hasErrors = true;
-    }
-    if (formValues.city === "Choose City") {
-      setError("city", {
-        type: "manual",
-        message: "City is required",
-      });
-      hasErrors = true;
-    }
-    if (formValues.region === "Choose Region") {
-      setError("region", {
-        type: "manual",
-        message: "Region is required",
-      });
-      hasErrors = true;
-    }
-
-    if (!hasErrors) {
-      if (localStorage.getItem("shippingData")) {
-        localStorage.removeItem("shippingData");
-      }
-
-      localStorage.setItem("shippingData", JSON.stringify(formValues));
-      props.setEnableOnlinePayment(false);
-      toast.success("Order is Confirmed");
-    }
-  };
-
   return (
     <div>
       <Toaster />
@@ -192,7 +112,7 @@ function ShippingDetails(props) {
             <div style={{ display: "block" }}>
               <select
                 className="form-input"
-                style={{ width: "210px" }}
+                style={{ width: "450px" }}
                 {...register("country", { validate: validateCountry })}
               >
                 <option hidden>Choose Country</option>
@@ -208,7 +128,7 @@ function ShippingDetails(props) {
             <label className="form-input-label">City</label>
             <select
               className="form-input"
-              style={{ width: "210px" }}
+              style={{ width: "450px" }}
               {...register("city", { validate: validateCity })}
             >
               <option hidden>Choose City</option>
@@ -225,7 +145,7 @@ function ShippingDetails(props) {
             <label className="form-input-label">Region</label>
             <select
               className="form-input"
-              style={{ width: "210px" }}
+              style={{ width: "450px" }}
               {...register("region", { validate: validateRegion })}
             >
               <option hidden>Choose Region</option>
