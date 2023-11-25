@@ -284,14 +284,7 @@ function ShippingDetails(props) {
           <input className="form-input" {...register("landMark")} />
         </div>
 
-        <div className="container-buttons">
           <Button buttonName="Proceed to Payment" type="submit" />
-          <Button
-            buttonName="Cash on Delivery"
-            type="button"
-            onClick={handlePayOnDelivery}
-          />
-        </div>
       </form>
     </div>
   );

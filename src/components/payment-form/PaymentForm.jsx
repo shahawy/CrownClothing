@@ -58,21 +58,68 @@ function PaymentForm() {
     }
   };
 
+  const [creditValue, setCreditValue] = useState("");
+  const [deliveryValue, setDeliveryValue] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+
+  const handleCredit = (e) => {
+    setCreditValue(e.target.value);
+    setDeliveryValue("");
+    setPaymentMethod("credit");
+  };
+
+  const handleDelivery = (e) => {
+    setDeliveryValue(e.target.value);
+    setCreditValue("");
+    setPaymentMethod("delivery");
+  };
+
   return (
     <div className="payment-form-container">
-      <form className="form-container" onSubmit={paymentHandler}>
-        <h2>Credit Card Payment</h2>
-        <CardElement />
-        <Button
-          disabled={isProcessingPayment}
-          style={{
-            backgroundColor: isProcessingPayment && "#2B2730",
-            marginTop: "30px",
-          }}
-          buttonType="inverted"
-          buttonName="Pay Now"
-        />
-      </form>
+      <div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div>
+            <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+              <input
+                type="radio"
+                value="credit"
+                onChange={handleCredit}
+                checked={creditValue === "credit"}
+              />
+              <h2>Credit Card Payment</h2>
+            </div>
+
+            {paymentMethod === "credit" && (
+              <form
+                className="form-container"
+                onSubmit={paymentHandler}
+                style={{ marginTop: "1.5em" }}
+              >
+                <CardElement />
+              </form>
+            )}
+          </div>
+
+          <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+            <input
+              type="radio"
+              value="delivery"
+              onChange={handleDelivery}
+              checked={deliveryValue === "delivery"}
+            />
+            <h2 >Cash On Delivery</h2>
+          </div>
+
+          <Button
+            disabled={isProcessingPayment}
+            style={{
+              backgroundColor: isProcessingPayment && "#2B2730",
+              marginTop: "30px",
+            }}
+            buttonName="Place Order"
+          />
+        </div>
+      </div>
     </div>
   );
 }
