@@ -33,6 +33,7 @@ useEffect(() => {  // The firebase method that watches the Authentication state 
    return unsubscribe  // To make the code run once when the component mounts to avoid memory leaks as onAuthStateChanged() method already listens for any changes in the user's Authentication state
 }, [])
 
+   
 
   return (
     <Suspense fallback={<Spinner />}>
