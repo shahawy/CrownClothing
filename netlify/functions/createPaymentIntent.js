@@ -3,6 +3,7 @@
 import dotenv from "dotenv";
 import stripe from "stripe";
 
+
 dotenv.config();
 
 const stripeInstance = stripe(process.env.STRIPE_SECRET_KEY);
